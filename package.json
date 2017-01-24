@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "MONGODB_URI=mongodb://localhost/partygames nodemon ./bin/www"
+    "start": "MONGODB_URI=mongodb://localhost/PartyGames nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.1",

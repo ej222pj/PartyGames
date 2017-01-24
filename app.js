@@ -15,6 +15,7 @@ const config = require('./config');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 require('./model/DAL/helper.js');
+
 const app = express();
 
 // view engine setup

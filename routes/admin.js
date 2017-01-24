@@ -1,15 +1,35 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+const express = require('express');
+const router = express.Router();
+const user = require('../model/DAL/userHandler.js');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.render('admin', { title: 'Admin' });
+/* GET admin */
+router.get('/', function (req, res) {
+  if (req.session.loggedIn) {
+    res.render('adminroom', { title: 'Admin Room', message: 'Welcome back boss!' });
+  }
+
+  res.render('admin', { title: 'Admin', message: '' });
 });
 
 router.post('/', function (req, res) {
-    console.log(req.body.username);
-    console.log(req.body.password);
-    res.send('Post page');
+  if (req.session.loggedIn) {
+    res.redirect('/');
+  } else {
+    const formUsername = req.body.username;
+    const formPassword = req.body.password;
+
+    user.findWithUsername(formUsername).then(function (user) {
+      if (formUsername == user.username && formPassword == user.password) {
+        req.session.loggedIn = user.username;
+        res.render('adminroom', { title: 'Admin Room', message: 'Welcome back boss!' });
+      } else {
+        res.render('admin', { title: 'Admin', message: 'Wrong username or password!' });
+      }
+    });
+
+
+  }
 });
 
 module.exports = router;
