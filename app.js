@@ -10,6 +10,8 @@ const sessions = require('express-session');
 const routes = require('./routes/index');
 const admin = require('./routes/admin');
 
+const config = require('./config');
+
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 require('./model/DAL/helper.js');
@@ -18,6 +20,12 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.use(sessions({
+  secret: config.sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
