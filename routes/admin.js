@@ -19,16 +19,18 @@ router.post('/', function (req, res) {
     const formUsername = req.body.username;
     const formPassword = req.body.password;
 
-    user.findWithUsername(formUsername).then(function (user) {
-      if (formUsername == user.username && formPassword == user.password) {
-        req.session.loggedIn = user.username;
-        res.render('adminroom', { title: 'Admin Room', message: 'Welcome back boss!' });
-      } else {
-        res.render('admin', { title: 'Admin', message: 'Wrong username or password!' });
-      }
-    });
-
-
+    if (formUsername == "" || formPassword == "") {
+      res.render('admin', { title: 'Admin', message: 'Wrong username or password!' });
+    } else {
+      user.findWithUsername(formUsername).then(function (user) {
+        if (user !== null && formUsername == user.username && formPassword == user.password) {
+          req.session.loggedIn = user.username;
+          res.render('adminroom', { title: 'Admin Room', message: 'Welcome back boss!' });
+        } else {
+          res.render('admin', { title: 'Admin', message: 'Wrong username or password!' });
+        }
+      });
+    }
   }
 });
 

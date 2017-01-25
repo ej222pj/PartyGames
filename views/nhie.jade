@@ -3,5 +3,17 @@ extends layout
 block content
   a(href='/') Back
   h1= title
-  p Question
-  
+  p= message
+  div(onclick="changeQuestion()").question#clickToChange= "Click to start"
+  form(name="question", method="post")
+    div.input
+      span.label Question: 
+      textarea(name="question", cols="30", rows="3")
+    div.input
+      span.label Adult: 
+      input(type ="radio", name="adult", value="adult")   
+      span.label Normal:  
+      input(type ="radio", name="adult", value="normal")  
+    div.actions
+      input(type="submit", value="Submit new question")
+  script(src="/javascripts/nhie.js" questions=jsonQuestions)
