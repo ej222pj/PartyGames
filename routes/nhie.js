@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
     let questionArray = req.session.questions;
     let jsonQuestions = JSON.stringify(questionArray);
     res.render('nhie', { title: 'Never Have I Ever', message: '', jsonQuestions });
-  }else{
+  } else {
     let questionArray = req.session.questions = [];
     nhie.findAllQuestions().then(function (questions) {
       questions.forEach(function (question) {
@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
       let jsonQuestions = JSON.stringify(questionArray);
       res.render('nhie', { title: 'Never Have I Ever', message: '', jsonQuestions });
     });
-  }  
+  }
 
 });
 
@@ -33,13 +33,19 @@ router.post('/', function (req, res) {
     adult = false;
   }
 
-  nhie.add(formQuestion, adult).then(function () {
-    console.log('New question added!')
-  });
-    let questionArray = req.session.questions;
-    let jsonQuestions = JSON.stringify(questionArray);
-  res.render('nhie', { title: 'Never Have I Ever', message: 'You have added a new question!', jsonQuestions });
+  let questionArray = req.session.questions;
+  let jsonQuestions = JSON.stringify(questionArray);
 
+  if (formQuestion.length > 0 && formQuestion.length < 60) {
+    nhie.add(formQuestion, adult).then(function () {
+      console.log('New question added!')
+    });
+
+    res.render('nhie', { title: 'Never Have I Ever', message: 'You have added a new question!', jsonQuestions });
+  }
+  else{
+    res.render('nhie', { title: 'Never Have I Ever', message: 'Error adding question, try again!', jsonQuestions });
+  }
 });
 
 module.exports = router;
