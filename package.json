@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "startmon": "MONGODB_URI=mongodb://localhost/PartyGames nodemon ./bin/www"
+    "startmon": "MONGODB_URI=mongodb://localhost/PartyGames nodemon ./bin/www",
     "start": "MONGODB_URI=mongodb://localhost/PartyGames node ./bin/www"
   },
   "dependencies": {
