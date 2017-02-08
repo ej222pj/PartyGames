@@ -4,3 +4,9 @@ block content
   h1= title
   p Choose a game!
   a(href='/nhie') Never Have I Ever!
+  script(src="/socket.io/socket.io.js")
+  script.
+    var socket = io('//localhost:3000');
+    socket.on('socketToMe', function (data) {
+      console.log(data);
+    });

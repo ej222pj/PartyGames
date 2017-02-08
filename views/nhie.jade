@@ -5,28 +5,28 @@ block content
   h1= title
   p.message= message
   div.questionTypes
-    span.label Adult Questions: 
-    input(type ="radio", name="adultQuestions", value="adult")   
-    span.label Normal Questions:  
+    span.label Adult Questions:
+    input(type ="radio", name="adultQuestions", value="adult")
+    span.label Normal Questions:
     input(type ="radio", name="adultQuestions", value="normal")
-    span.label Mixed Questions:  
+    span.label Mixed Questions:
     input(type ="radio", name="adultQuestions", value="mix")
   div.newQuestion
     form(name="question", method="post")
       div.input
-        span.label Add new question: 
+        span.label Add new question:
         textarea(name="question", cols="30", rows="2", maxlength="60"
-        onkeyup="countChars('data','charcount');" 
-        onkeydown="countChars('data','charcount');" 
+        onkeyup="countChars('data','charcount');"
+        onkeydown="countChars('data','charcount');"
         onmouseout="countChars('data','charcount');")#questionTextfield
       div.maxChars
-        span.maxCharCurrent#charcount= 0 
+        span.maxCharCurrent#charcount= 0
         p.maxCharTotal= "/60"
       div.input
-        span.label Adult: 
-        input(type ="radio", name="adult", value="adult")   
-        span.label Normal:  
-        input(type ="radio", name="adult", value="normal")  
+        span.label Adult:
+        input(type ="radio", name="adult", value="adult")
+        span.label Normal:
+        input(type ="radio", name="adult", value="normal")
       div.actions
         input(type="submit", value="Submit new question")
   div.questionContainer

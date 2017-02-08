@@ -19,6 +19,9 @@ require('./model/DAL/helper.js');
 
 const app = express();
 
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -28,6 +31,11 @@ app.use(sessions({
   resave: false,
   saveUninitialized: false,
 }));
+
+app.use(function(req, res, next){
+  res.io = io;
+  next();
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -73,4 +81,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports = {
+  app: app,
+  server: server,
+};
